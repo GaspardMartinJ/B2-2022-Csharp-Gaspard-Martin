@@ -10,16 +10,16 @@ internal class Program
         while (boucle)
         {
             string input = demande.DemandeString(
-                "Bienvenu dans l'application de gestion de salles\n" +
+                "Bienvenue dans l'application de gestion de salles\n" +
                 "Que voulez vous faire ?\n" +
-                "1: Créer une nouvelle salle\n" +
-                "2: Afficher l'ensemble des salles\n" +
-                "3: Afficher le nombre total de places\n" +
-                "Q: Quitter");
+                "1. Créer une nouvelle salle\n" +
+                "2. Afficher l'ensemble des salles\n" +
+                "3. Afficher le nombre total de places\n" +
+                "Q. Quitter").ToLower();
             switch (input)
             {
                 case "1":
-                    salleDeClasseServices.AjouterSalleDeClasse();
+                    salleDeClasseServices.AjouterSalleDeClasse(salleDeClasseServices.CreerSalleDeClasse());
                     break;
                 case "2":
                     Console.WriteLine(salleDeClasseServices.AfficherSallesDeClasse());
