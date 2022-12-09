@@ -5,8 +5,14 @@ namespace gestion_salle_de_classe.Services
 {
     public class SalleDeClasseServices
     {
-        Demande demande = new();
+        Demande _demande;
+        BatimentServices _batimentServices;
         private List<SalleDeClasse> sallesDeClasse = new();
+        public SalleDeClasseServices(Demande demande, BatimentServices batimentServices)
+        {
+            _batimentServices = batimentServices;
+            _demande = demande;
+        }
         // le format numérique allemand a des points entre les milliers
         CultureInfo format = CultureInfo.CreateSpecificCulture("de-DE");
 
@@ -14,17 +20,49 @@ namespace gestion_salle_de_classe.Services
         // utiliser seulement une des 2 fonctionnalités
         public void AjouterSalleDeClasse(SalleDeClasse salleDeClasse)
         {
-            sallesDeClasse.Add(salleDeClasse);
+            if (salleDeClasse != null)
+            {
+                sallesDeClasse.Add(salleDeClasse);
+            }
         }
         public SalleDeClasse CreerSalleDeClasse()
         {
-            SalleDeClasse salleDeClasse = new()
+            List<Batiment> batiments = _batimentServices.batiments;
+            SalleDeClasse? salleDeClasse = null;
+            if (batiments.Count > 0)
             {
-                Code = demande.DemandeCode("Code :"),
-                Type = demande.DemandeString("Type :"),
-                NbPlaces = demande.DemandeInt("Nombre de places :"),
-            };
+                salleDeClasse = new()
+                {
+                    Code = _demande.DemandeCode("Code :"),
+                    Type = _demande.DemandeString("Type :"),
+                    NbPlaces = _demande.DemandeInt("Nombre de places :"),
+                    Batiment = DemandeBatiment(),
+                };
+                salleDeClasse.Batiment.SalleDeClasses.Add(salleDeClasse);
+            }
+            else
+            {
+                Console.WriteLine("Il faut définir au moins un batiment avant de pouvoir définir une salle.");
+            }
             return salleDeClasse;
+        }
+        public Batiment DemandeBatiment()
+        {
+            Batiment res;
+            List<Batiment> batiments = _batimentServices.batiments;
+            Console.WriteLine("Liste des batiments :");
+            Console.WriteLine(_batimentServices.AfficherBatiments());
+            while (true)
+            {
+                string choix = _demande.DemandeString("Entrez le nom du batiment de la classe :");
+                Batiment? batiment = batiments.FirstOrDefault(bat => bat.Nom == choix);
+                if (batiment != default(Batiment))
+                {
+                    res = batiment;
+                    break;
+                }
+            }
+            return res;
         }
         public string AfficherSallesDeClasse()
         {
@@ -45,6 +83,7 @@ namespace gestion_salle_de_classe.Services
             return $"{padding}\n" +
                 $"Code : {salleDeClasse.Code}, Type : {salleDeClasse.Type}\n" +
                 $"Nombre de places : {formatted}\n" +
+                $"Batiment : {salleDeClasse.Batiment.Nom}, Ville : {salleDeClasse.Batiment.Ville}\n" +
                 padding;
         }
         public string AfficherNbPlaceTotal()

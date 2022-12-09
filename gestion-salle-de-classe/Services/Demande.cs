@@ -2,41 +2,40 @@
 {
     public class Demande
     {
-        public string DemandeString(string affichage)
+        public virtual string DemandeString(string affichage)
         {
             Console.WriteLine(affichage);
             return Console.ReadLine()!;
         }
-        public string DemandeCode(string affichage)
+        public virtual string DemandeCode(string affichage)
         {
             string code = "";
-            while (true) {
+            while (true)
+            {
                 Console.WriteLine(affichage);
                 code = Console.ReadLine()!;
                 // on vérifie que le code n'est pas vide pour afficher le message d'erreur
                 // et éviter une erreur lors de la comparaison de la première lettre
-                if (code != "") { 
-                    // on vérifie que la première lettre n'est pas une majuscule
-                    if (code[0] == char.ToLower(code[0])) {
-                        // on vérifiie que tous les caractères ne sont pas des chiffres pour afficher un message plus précis
-                        if (code.All(char.IsDigit)) {
-                            Console.WriteLine("Saisie Incorrecte : le code de la salle ne doit pas être un numérique");
-                        }
-                        else {
-                            Console.WriteLine("Saisie Incorrecte : le code de la salle doit commencer par une majuscule");
-                        }
-                    }
-                    else {
-                        break;
-                    }
-                }
-                else {
+                if (code == "")
+                {
                     Console.WriteLine("Saisie Incorrecte : le code de la salle ne doit pas être vide");
+                }
+                else if (code[0] != char.ToLower(code[0]))
+                {
+                    break;
+                }
+                else if (code.All(char.IsDigit))
+                {
+                    Console.WriteLine("Saisie Incorrecte : le code de la salle ne doit pas être un numérique");
+                }
+                else
+                {
+                    Console.WriteLine("Saisie Incorrecte : le code de la salle doit commencer par une majuscule");
                 }
             }
             return code;
         }
-        public int DemandeInt(string affichage)
+        public virtual int DemandeInt(string affichage)
         {
             int nbr = 0;
             while (nbr <= 0)

@@ -5,7 +5,8 @@ internal class Program
     private static void Main(string[] args)
     {
         Demande demande = new();
-        SalleDeClasseServices salleDeClasseServices = new();
+        BatimentServices batimentServices = new(demande);
+        SalleDeClasseServices salleDeClasseServices = new(demande, batimentServices);
         bool boucle = true;
         while (boucle)
         {
@@ -15,6 +16,8 @@ internal class Program
                 "1. Créer une nouvelle salle\n" +
                 "2. Afficher l'ensemble des salles\n" +
                 "3. Afficher le nombre total de places\n" +
+                "4. Créer un nouveau batiment\n" +
+                "5. Afficher l'ensemble des batiments\n" +
                 "Q. Quitter").ToLower();
             switch (input)
             {
@@ -26,6 +29,12 @@ internal class Program
                     break;
                 case "3":
                     Console.WriteLine(salleDeClasseServices.AfficherNbPlaceTotal());
+                    break;
+                case "4":
+                    batimentServices.AjouterBatiment(batimentServices.CreerBatiment());
+                    break;
+                case "5":
+                    Console.WriteLine(batimentServices.AfficherBatiments());
                     break;
                 case "q":
                     boucle = false;
