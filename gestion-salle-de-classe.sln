@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33103.184
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "gestion-salle-de-classe", "gestion-salle-de-classe\gestion-salle-de-classe.csproj", "{F39CC5C6-7600-4F4C-8801-7E4979CB09AB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "gestion-salle-de-classe", "gestion-salle-de-classe\gestion-salle-de-classe.csproj", "{F39CC5C6-7600-4F4C-8801-7E4979CB09AB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "gestion-salle-de-classe-tests", "gestion-salle-de-classe-tests\gestion-salle-de-classe-tests.csproj", "{5535E910-80A2-4AE9-9C9B-88A88932662E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{F39CC5C6-7600-4F4C-8801-7E4979CB09AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F39CC5C6-7600-4F4C-8801-7E4979CB09AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F39CC5C6-7600-4F4C-8801-7E4979CB09AB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5535E910-80A2-4AE9-9C9B-88A88932662E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5535E910-80A2-4AE9-9C9B-88A88932662E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5535E910-80A2-4AE9-9C9B-88A88932662E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5535E910-80A2-4AE9-9C9B-88A88932662E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
