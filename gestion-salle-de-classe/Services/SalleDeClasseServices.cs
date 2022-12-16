@@ -7,7 +7,7 @@ namespace gestion_salle_de_classe.Services
     {
         Demande _demande;
         BatimentServices _batimentServices;
-        private List<SalleDeClasse> sallesDeClasse = new();
+        public List<SalleDeClasse> sallesDeClasse = new();
         public SalleDeClasseServices(Demande demande, BatimentServices batimentServices)
         {
             _batimentServices = batimentServices;
@@ -36,7 +36,7 @@ namespace gestion_salle_de_classe.Services
                     Code = _demande.DemandeCode("Code :"),
                     Type = _demande.DemandeString("Type :"),
                     NbPlaces = _demande.DemandeInt("Nombre de places :"),
-                    Batiment = DemandeBatiment(),
+                    Batiment = _batimentServices.DemandeBatiment(),
                 };
                 salleDeClasse.Batiment.SalleDeClasses.Add(salleDeClasse);
             }
@@ -45,24 +45,6 @@ namespace gestion_salle_de_classe.Services
                 Console.WriteLine("Il faut définir au moins un batiment avant de pouvoir définir une salle.");
             }
             return salleDeClasse;
-        }
-        public Batiment DemandeBatiment()
-        {
-            Batiment res;
-            List<Batiment> batiments = _batimentServices.batiments;
-            Console.WriteLine("Liste des batiments :");
-            Console.WriteLine(_batimentServices.AfficherBatiments());
-            while (true)
-            {
-                string choix = _demande.DemandeString("Entrez le nom du batiment de la classe :");
-                Batiment? batiment = batiments.FirstOrDefault(bat => bat.Nom == choix);
-                if (batiment != default(Batiment))
-                {
-                    res = batiment;
-                    break;
-                }
-            }
-            return res;
         }
         public string AfficherSallesDeClasse()
         {

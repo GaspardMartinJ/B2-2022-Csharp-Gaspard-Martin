@@ -21,7 +21,7 @@ namespace gestion_salle_de_classe.Services
         {
             Batiment batiment = new()
             {
-                Code = _demande.DemandeCode("Code :"),
+                Code = _demande.DemandeString("Code :"),
                 Nom = _demande.DemandeString("Nom :"),
                 Adresse = _demande.DemandeString("Adresse :"),
                 CodePostal = _demande.DemandeInt("Code Postal :"),
@@ -29,6 +29,23 @@ namespace gestion_salle_de_classe.Services
                 SalleDeClasses = new List<SalleDeClasse>(),
             };
             return batiment;
+        }
+        public Batiment DemandeBatiment()
+        {
+            Batiment res;
+            Console.WriteLine("Liste des batiments :");
+            Console.WriteLine(AfficherBatiments());
+            while (true)
+            {
+                string choix = _demande.DemandeString("Entrez le nom du batiment de la classe :");
+                Batiment? batiment = batiments.FirstOrDefault(bat => bat.Nom == choix);
+                if (batiment != default(Batiment))
+                {
+                    res = batiment;
+                    break;
+                }
+            }
+            return res;
         }
         public string AfficherBatiments()
         {

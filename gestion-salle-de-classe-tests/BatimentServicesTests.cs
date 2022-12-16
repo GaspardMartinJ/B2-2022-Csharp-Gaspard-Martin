@@ -30,6 +30,36 @@ namespace gestion_salle_de_classe_tests
         }
 
         [Test]
+        public void TestAjouterBatiment()
+        {
+            batimentServices.AjouterBatiment(batimentServices.CreerBatiment());
+            Batiment b = batimentServices.batiments[0];
+
+            Assert.IsNotNull(b);
+            Assert.That(b.Code, Is.EqualTo("A1"));
+            Assert.That(b.Nom, Is.EqualTo("nom"));
+            Assert.That(b.Adresse, Is.EqualTo("adr"));
+            Assert.That(b.CodePostal, Is.EqualTo(123));
+            Assert.That(b.Ville, Is.EqualTo("vil"));
+            Assert.That(b.SalleDeClasses, Is.EqualTo(new List<SalleDeClasse>()));
+        }
+
+        [Test]
+        public void TestDemandeBatiment()
+        {
+            batimentServices.AjouterBatiment(batimentServices.CreerBatiment());
+            Batiment b = batimentServices.DemandeBatiment();
+
+            Assert.IsNotNull(b);
+            Assert.That(b.Code, Is.EqualTo("A1"));
+            Assert.That(b.Nom, Is.EqualTo("nom"));
+            Assert.That(b.Adresse, Is.EqualTo("adr"));
+            Assert.That(b.CodePostal, Is.EqualTo(123));
+            Assert.That(b.Ville, Is.EqualTo("vil"));
+            Assert.That(b.SalleDeClasses, Is.EqualTo(new List<SalleDeClasse>()));
+        }
+
+        [Test]
         public void TestAfficherBatiment()
         {
             Batiment b = batimentServices.CreerBatiment();

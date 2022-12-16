@@ -31,19 +31,20 @@ namespace gestion_salle_de_classe_tests
         }
 
         [Test]
-        public void TestDemandeBatiment()
+        public void TestAjouterSalleDeClasse()
         {
-            Batiment b = salleDeClasseServices.DemandeBatiment();
+            salleDeClasseServices.AjouterSalleDeClasse(salleDeClasseServices.CreerSalleDeClasse());
+            SalleDeClasse s = salleDeClasseServices.sallesDeClasse[0];
 
-            Assert.IsNotNull(b);
-            Assert.That(b.Code, Is.EqualTo("A1"));
-            Assert.That(b.Nom, Is.EqualTo("nom"));
-            Assert.That(b.Adresse, Is.EqualTo("adr"));
-            Assert.That(b.CodePostal, Is.EqualTo(123));
-            Assert.That(b.Ville, Is.EqualTo("vil"));
-            Assert.That(b.SalleDeClasses, Is.EqualTo(new List<SalleDeClasse>()));
+            Assert.IsNotNull(s);
+            Assert.That(s.Code, Is.EqualTo("A1"));
+            Assert.That(s.Type, Is.EqualTo("typ"));
+            Assert.That(s.NbPlaces, Is.EqualTo(10000));
+            Assert.That(s.Batiment, Is.EqualTo(batimentServices.batiments[0]));
         }
-        public void TestAfficherBatiment()
+
+        [Test]
+        public void TestAfficherSalleDeClasse()
         {
             SalleDeClasse s = salleDeClasseServices.CreerSalleDeClasse();
             string res = salleDeClasseServices.AfficherSalleDeClasse(s);
@@ -58,7 +59,7 @@ namespace gestion_salle_de_classe_tests
         }
 
         [Test]
-        public void TestAfficherBatiments()
+        public void TestAfficherSalleDeClasses()
         {
             salleDeClasseServices.AjouterSalleDeClasse(salleDeClasseServices.CreerSalleDeClasse());
             salleDeClasseServices.AjouterSalleDeClasse(salleDeClasseServices.CreerSalleDeClasse());
